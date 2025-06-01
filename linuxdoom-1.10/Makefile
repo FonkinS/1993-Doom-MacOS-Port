@@ -6,12 +6,19 @@
 #
 CC=  gcc  # gcc or g++
 
-CFLAGS=-g -Wall -DNORMALUNIX -DLINUX # -DUSEASM 
-LDFLAGS=-L/usr/X11R6/lib
-LIBS=-lXext -lX11 -lnsl -lm
+CFLAGS=-g -Wall -DNORMALUNIX -DLINUX
+
+ifdef DEBUG
+	CFLAGS += -O0
+endif
+
+#LDFLAGS=-L/usr/X11R6/lib
+#LIBS=-lXext -lX11 -lnsl -lm
+LIBS=-lm
 
 # subdirectory for objects
-O=linux
+#O=linux
+O = .
 
 # not too sophisticated dependency
 OBJS=				\
@@ -86,6 +93,9 @@ clean:
 $(O)/linuxxdoom:	$(OBJS) $(O)/i_main.o
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(O)/i_main.o \
 	-o $(O)/linuxxdoom $(LIBS)
+
+run: $(O)/linuxxdoom
+	$(O)/linuxxdoom
 
 $(O)/%.o:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@
