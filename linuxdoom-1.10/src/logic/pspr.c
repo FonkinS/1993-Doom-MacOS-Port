@@ -25,21 +25,21 @@
 static const char
 rcsid[] = "$Id: p_pspr.c,v 1.5 1997/02/03 22:45:12 b1 Exp $";
 
-#include "doomdef.h"
-#include "d_event.h"
+#include "global/doomdef.h"
+#include "init/event.h"
 
 
-#include "m_random.h"
-#include "p_local.h"
-#include "s_sound.h"
+#include "misc/random.h"
+#include "logic/local.h"
+#include "sound/sound.h"
 
 // State.
-#include "doomstat.h"
+#include "global/doomstat.h"
 
 // Data.
-#include "sounds.h"
+#include "sound/sounds.h"
 
-#include "p_pspr.h"
+#include "logic/pspr.h"
 
 #define LOWERSPEED		FRACUNIT*6
 #define RAISESPEED		FRACUNIT*6

@@ -23,7 +23,7 @@
 #ifndef __D_NET__
 #define __D_NET__
 
-#include "d_player.h"
+#include "init/player.h"
 
 
 #ifdef __GNUG__

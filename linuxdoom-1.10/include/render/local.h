@@ -24,26 +24,26 @@
 #define __R_LOCAL__
 
 // Binary Angles, sine/cosine/atan lookups.
-#include "tables.h"
+#include "global/tables.h"
 
 // Screen size related parameters.
-#include "doomdef.h"
+#include "global/doomdef.h"
 
 // Include the refresh/render data structs.
-#include "r_data.h"
+#include "render/data.h"
 
 
 
 //
 // Separate header file for each module.
 //
-#include "r_main.h"
-#include "r_bsp.h"
-#include "r_segs.h"
-#include "r_plane.h"
-#include "r_data.h"
-#include "r_things.h"
-#include "r_draw.h"
+#include "render/main.h"
+#include "render/bsp.h"
+#include "render/segs.h"
+#include "render/plane.h"
+#include "render/data.h"
+#include "render/things.h"
+#include "render/draw.h"
 
 #endif		// __R_LOCAL__
 //-----------------------------------------------------------------------------

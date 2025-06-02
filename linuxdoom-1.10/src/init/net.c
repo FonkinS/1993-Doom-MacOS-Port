@@ -26,13 +26,13 @@
 static const char rcsid[] = "$Id: d_net.c,v 1.3 1997/02/03 22:01:47 b1 Exp $";
 
 
-#include "m_menu.h"
-#include "i_system.h"
-#include "i_video.h"
-#include "i_net.h"
-#include "g_game.h"
-#include "doomdef.h"
-#include "doomstat.h"
+#include "misc/menu.h"
+#include "system/system.h"
+#include "system/video.h"
+#include "system/net.h"
+#include "main/game.h"
+#include "global/doomdef.h"
+#include "global/doomstat.h"
 
 #define	NCMD_EXIT		0x80000000
 #define	NCMD_RETRANSMIT		0x40000000

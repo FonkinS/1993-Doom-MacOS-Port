@@ -28,22 +28,22 @@ rcsid[] = "$Id: p_setup.c,v 1.5 1997/02/03 22:45:12 b1 Exp $";
 
 #include <math.h>
 
-#include "z_zone.h"
+#include "zone/zone.h"
 
-#include "m_swap.h"
-#include "m_bbox.h"
+#include "misc/swap.h"
+#include "misc/bbox.h"
 
-#include "g_game.h"
+#include "main/game.h"
 
-#include "i_system.h"
-#include "w_wad.h"
+#include "system/system.h"
+#include "wad/wad.h"
 
-#include "doomdef.h"
-#include "p_local.h"
+#include "global/doomdef.h"
+#include "logic/local.h"
 
-#include "s_sound.h"
+#include "sound/sound.h"
 
-#include "doomstat.h"
+#include "global/doomstat.h"
 
 
 void	P_SpawnMapThing (mapthing_t*	mthing);

@@ -23,7 +23,7 @@
 #ifndef __D_ITEMS__
 #define __D_ITEMS__
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
 #ifdef __GNUG__
 #pragma interface

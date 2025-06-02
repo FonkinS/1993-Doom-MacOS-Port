@@ -1,8 +1,8 @@
 CC=clang
-CFLAGS=-g -Wall -DNORMALUNIX -DLINUX --include-directory=include
+CFLAGS=-g -Wall -DNORMALUNIX -DLINUX --include-directory=include 
 
 ifdef DEBUG
-	CFLAGS += -O0
+	CFLAGS += -O0 -Wno-unused-const-variable -Wno-unused-but-set-variable
 endif
 
 #LDFLAGS=-L/usr/X11R6/lib
@@ -26,16 +26,16 @@ all: $(OUTPUT_NAME)
 #	echo $(OBJECTS)
 
 clean:
-	rm -f build/*
+	rm -f -r build/*
 
 $(OUTPUT_NAME):	$(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $@ $(LIBS)
 
 
-$(OBJECT_DIR)/%:	$(SOURCE_DIR)/%
+$(OBJECT_DIR)/%.o:	$(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: $(OUTPUT_NAME)
-	./$@
+	./$< -file WAD/doom1.wad
 

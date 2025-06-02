@@ -27,48 +27,48 @@ rcsid[] = "$Id: g_game.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 #include <string.h>
 #include <stdlib.h>
 
-#include "doomdef.h" 
-#include "doomstat.h"
+#include "global/doomdef.h" 
+#include "global/doomstat.h"
 
-#include "z_zone.h"
-#include "f_finale.h"
-#include "m_argv.h"
-#include "m_misc.h"
-#include "m_menu.h"
-#include "m_random.h"
-#include "i_system.h"
+#include "zone/zone.h"
+#include "final/finale.h"
+#include "misc/argv.h"
+#include "misc/misc.h"
+#include "misc/menu.h"
+#include "misc/random.h"
+#include "system/system.h"
 
-#include "p_setup.h"
-#include "p_saveg.h"
-#include "p_tick.h"
+#include "logic/setup.h"
+#include "logic/saveg.h"
+#include "logic/tick.h"
 
-#include "d_main.h"
+#include "init/main.h"
 
-#include "wi_stuff.h"
-#include "hu_stuff.h"
-#include "st_stuff.h"
-#include "am_map.h"
+#include "win/stuff.h"
+#include "hud/stuff.h"
+#include "status/stuff.h"
+#include "automap/map.h"
 
 // Needs access to LFB.
-#include "v_video.h"
+#include "graphics/video.h"
 
-#include "w_wad.h"
+#include "wad/wad.h"
 
-#include "p_local.h" 
+#include "logic/local.h" 
 
-#include "s_sound.h"
+#include "sound/sound.h"
 
 // Data.
-#include "dstrings.h"
-#include "sounds.h"
+#include "misc/strings.h"
+#include "sound/sounds.h"
 
 // SKY handling - still the wrong place.
-#include "r_data.h"
-#include "r_sky.h"
+#include "render/data.h"
+#include "render/sky.h"
 
 
 
-#include "g_game.h"
+#include "main/game.h"
 
 
 #define SAVEGAMESIZE	0x2c000

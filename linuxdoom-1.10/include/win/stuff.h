@@ -24,7 +24,7 @@
 
 //#include "v_video.h"
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
 // States for the intermission
 

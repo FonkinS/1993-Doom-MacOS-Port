@@ -27,26 +27,26 @@
 static const char
 rcsid[] = "$Id: r_data.c,v 1.4 1997/02/03 16:47:55 b1 Exp $";
 
-#include "i_system.h"
-#include "z_zone.h"
+#include "system/system.h"
+#include "zone/zone.h"
 
-#include "m_swap.h"
+#include "misc/swap.h"
 
-#include "w_wad.h"
+#include "wad/wad.h"
 
-#include "doomdef.h"
-#include "r_local.h"
-#include "p_local.h"
+#include "global/doomdef.h"
+#include "render/local.h"
+#include "logic/local.h"
 
-#include "doomstat.h"
-#include "r_sky.h"
+#include "global/doomstat.h"
+#include "render/sky.h"
 
 #ifdef LINUX
 #include  <alloca.h>
 #endif
 
 
-#include "r_data.h"
+#include "render/data.h"
 
 //
 // Graphics.

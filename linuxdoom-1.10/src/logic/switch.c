@@ -26,20 +26,20 @@ static const char
 rcsid[] = "$Id: p_switch.c,v 1.3 1997/01/28 22:08:29 b1 Exp $";
 
 
-#include "i_system.h"
-#include "doomdef.h"
-#include "p_local.h"
+#include "system/system.h"
+#include "global/doomdef.h"
+#include "logic/local.h"
 
-#include "g_game.h"
+#include "main/game.h"
 
-#include "s_sound.h"
+#include "sound/sound.h"
 
 // Data.
-#include "sounds.h"
+#include "sound/sounds.h"
 
 // State.
-#include "doomstat.h"
-#include "r_state.h"
+#include "global/doomstat.h"
+#include "render/state.h"
 
 
 //

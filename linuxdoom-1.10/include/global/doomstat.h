@@ -30,11 +30,11 @@
 
 // We need globally shared data structures,
 //  for defining the global state variables.
-#include "doomdata.h"
-#include "d_net.h"
+#include "global/doomdata.h"
+#include "init/net.h"
 
 // We need the playr data structure as well.
-#include "d_player.h"
+#include "init/player.h"
 
 
 #ifdef __GNUG__

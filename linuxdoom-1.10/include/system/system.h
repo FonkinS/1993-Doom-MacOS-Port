@@ -23,8 +23,8 @@
 #ifndef __I_SYSTEM__
 #define __I_SYSTEM__
 
-#include "d_ticcmd.h"
-#include "d_event.h"
+#include "init/ticcmd.h"
+#include "init/event.h"
 
 #ifdef __GNUG__
 #pragma interface

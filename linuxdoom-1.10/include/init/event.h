@@ -24,7 +24,7 @@
 #define __D_EVENT__
 
 
-#include "doomtype.h"
+#include "global/doomtype.h"
 
 
 //

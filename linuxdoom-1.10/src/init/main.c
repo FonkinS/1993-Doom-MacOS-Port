@@ -41,41 +41,41 @@ static const char rcsid[] = "$Id: d_main.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 #endif
 
 
-#include "doomdef.h"
-#include "doomstat.h"
+#include "global/doomdef.h"
+#include "global/doomstat.h"
 
-#include "dstrings.h"
-#include "sounds.h"
-
-
-#include "z_zone.h"
-#include "w_wad.h"
-#include "s_sound.h"
-#include "v_video.h"
-
-#include "f_finale.h"
-#include "f_wipe.h"
-
-#include "m_argv.h"
-#include "m_misc.h"
-#include "m_menu.h"
-
-#include "i_system.h"
-#include "i_sound.h"
-#include "i_video.h"
-
-#include "g_game.h"
-
-#include "hu_stuff.h"
-#include "wi_stuff.h"
-#include "st_stuff.h"
-#include "am_map.h"
-
-#include "p_setup.h"
-#include "r_local.h"
+#include "misc/strings.h"
+#include "sound/sounds.h"
 
 
-#include "d_main.h"
+#include "zone/zone.h"
+#include "wad/wad.h"
+#include "sound/sound.h"
+#include "graphics/video.h"
+
+#include "final/finale.h"
+#include "final/wipe.h"
+
+#include "misc/argv.h"
+#include "misc/misc.h"
+#include "misc/menu.h"
+
+#include "system/system.h"
+#include "system/sound.h"
+#include "system/video.h"
+
+#include "main/game.h"
+
+#include "hud/stuff.h"
+#include "win/stuff.h"
+#include "status/stuff.h"
+#include "automap/map.h"
+
+#include "logic/setup.h"
+#include "render/local.h"
+
+
+#include "init/main.h"
 
 //
 // D-DoomLoop()
@@ -940,7 +940,7 @@ void D_DoomMain (void)
     {
 	// the parms after p are wadfile/lump names,
 	// until end of parms or another - preceded parm
-	modifiedgame = true;            // homebrew levels
+	// TODOCHANGED modifiedgame = true;            // homebrew levels
 	while (++p != myargc && myargv[p][0] != '-')
 	    D_AddFile (myargv[p]);
     }

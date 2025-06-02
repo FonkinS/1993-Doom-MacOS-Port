@@ -38,15 +38,15 @@ rcsid[] = "$Id: w_wad.c,v 1.5 1997/02/03 16:47:57 b1 Exp $";
 #define O_BINARY		0
 #endif
 
-#include "doomtype.h"
-#include "m_swap.h"
-#include "i_system.h"
-#include "z_zone.h"
+#include "global/doomtype.h"
+#include "misc/swap.h"
+#include "system/system.h"
+#include "zone/zone.h"
 
 #ifdef __GNUG__
 #pragma implementation "w_wad.h"
 #endif
-#include "w_wad.h"
+#include "wad/wad.h"
 
 
 

@@ -25,7 +25,7 @@
 #define __INFO__
 
 // Needed for action function pointer handling.
-#include "d_think.h"
+#include "init/think.h"
 
 typedef enum
 {

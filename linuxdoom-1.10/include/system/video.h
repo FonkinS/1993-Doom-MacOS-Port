@@ -24,7 +24,7 @@
 #define __I_VIDEO__
 
 
-#include "doomtype.h"
+#include "global/doomtype.h"
 
 #ifdef __GNUG__
 #pragma interface

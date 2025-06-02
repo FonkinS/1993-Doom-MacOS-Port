@@ -24,8 +24,8 @@
 #ifndef __R_DATA__
 #define __R_DATA__
 
-#include "r_defs.h"
-#include "r_state.h"
+#include "render/defs.h"
+#include "render/state.h"
 
 #ifdef __GNUG__
 #pragma interface

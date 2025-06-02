@@ -28,12 +28,12 @@ static const char
 rcsid[] = "$Id: p_user.c,v 1.3 1997/01/28 22:08:29 b1 Exp $";
 
 
-#include "doomdef.h"
-#include "d_event.h"
+#include "global/doomdef.h"
+#include "init/event.h"
 
-#include "p_local.h"
+#include "logic/local.h"
 
-#include "doomstat.h"
+#include "global/doomstat.h"
 
 
 

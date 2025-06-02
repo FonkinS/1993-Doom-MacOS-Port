@@ -28,19 +28,19 @@ rcsid[] = "$Id: f_finale.c,v 1.5 1997/02/03 21:26:34 b1 Exp $";
 #include <ctype.h>
 
 // Functions.
-#include "i_system.h"
-#include "m_swap.h"
-#include "z_zone.h"
-#include "v_video.h"
-#include "w_wad.h"
-#include "s_sound.h"
+#include "system/system.h"
+#include "misc/swap.h"
+#include "zone/zone.h"
+#include "graphics/video.h"
+#include "wad/wad.h"
+#include "sound/sound.h"
 
 // Data.
-#include "dstrings.h"
-#include "sounds.h"
+#include "misc/strings.h"
+#include "sound/sounds.h"
 
-#include "doomstat.h"
-#include "r_state.h"
+#include "global/doomstat.h"
+#include "render/state.h"
 
 // ?
 //#include "doomstat.h"
@@ -254,7 +254,7 @@ void F_Ticker (void)
 // F_TextWrite
 //
 
-#include "hu_stuff.h"
+#include "hud/stuff.h"
 extern	patch_t *hu_font[HU_FONTSIZE];
 
 

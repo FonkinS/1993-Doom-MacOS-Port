@@ -25,17 +25,17 @@
 
 
 // Screenwidth.
-#include "doomdef.h"
+#include "global/doomdef.h"
 
 // Some more or less basic data types
 // we depend on.
-#include "m_fixed.h"
+#include "misc/fixed.h"
 
 // We rely on the thinker data struct
 // to handle sound origins in sectors.
-#include "d_think.h"
+#include "init/think.h"
 // SECTORS do store MObjs anyway.
-#include "p_mobj.h"
+#include "logic/mobj.h"
 
 
 

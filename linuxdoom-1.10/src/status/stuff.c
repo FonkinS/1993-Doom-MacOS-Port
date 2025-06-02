@@ -29,37 +29,37 @@ rcsid[] = "$Id: st_stuff.c,v 1.6 1997/02/03 22:45:13 b1 Exp $";
 
 #include <stdio.h>
 
-#include "i_system.h"
-#include "i_video.h"
-#include "z_zone.h"
-#include "m_random.h"
-#include "w_wad.h"
+#include "system/system.h"
+#include "system/video.h"
+#include "zone/zone.h"
+#include "misc/random.h"
+#include "wad/wad.h"
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
-#include "g_game.h"
+#include "main/game.h"
 
-#include "st_stuff.h"
-#include "st_lib.h"
-#include "r_local.h"
+#include "status/stuff.h"
+#include "status/lib.h"
+#include "render/local.h"
 
-#include "p_local.h"
-#include "p_inter.h"
+#include "logic/local.h"
+#include "logic/inter.h"
 
-#include "am_map.h"
-#include "m_cheat.h"
+#include "automap/map.h"
+#include "misc/cheat.h"
 
-#include "s_sound.h"
+#include "sound/sound.h"
 
 // Needs access to LFB.
-#include "v_video.h"
+#include "graphics/video.h"
 
 // State.
-#include "doomstat.h"
+#include "global/doomstat.h"
 
 // Data.
-#include "dstrings.h"
-#include "sounds.h"
+#include "misc/strings.h"
+#include "sound/sounds.h"
 
 //
 // STATUS BAR DATA

@@ -49,13 +49,13 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 #include <errno.h>
 #include <signal.h>
 
-#include "doomstat.h"
-#include "i_system.h"
-#include "v_video.h"
-#include "m_argv.h"
-#include "d_main.h"
+#include "global/doomstat.h"
+#include "system/system.h"
+#include "graphics/video.h"
+#include "misc/argv.h"
+#include "init/main.h"
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
 #define POINTER_WARP_COUNTDOWN	1
 

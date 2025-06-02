@@ -24,20 +24,20 @@
 static const char
 rcsid[] = "$Id: p_mobj.c,v 1.5 1997/02/03 22:45:12 b1 Exp $";
 
-#include "i_system.h"
-#include "z_zone.h"
-#include "m_random.h"
+#include "system/system.h"
+#include "zone/zone.h"
+#include "misc/random.h"
 
-#include "doomdef.h"
-#include "p_local.h"
-#include "sounds.h"
+#include "global/doomdef.h"
+#include "logic/local.h"
+#include "sound/sounds.h"
 
-#include "st_stuff.h"
-#include "hu_stuff.h"
+#include "status/stuff.h"
+#include "hud/stuff.h"
 
-#include "s_sound.h"
+#include "sound/sound.h"
 
-#include "doomstat.h"
+#include "global/doomstat.h"
 
 
 void G_PlayerReborn (int player);

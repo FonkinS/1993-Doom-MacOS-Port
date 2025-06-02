@@ -27,20 +27,20 @@ rcsid[] = "$Id: p_map.c,v 1.5 1997/02/03 22:45:11 b1 Exp $";
 
 #include <stdlib.h>
 
-#include "m_bbox.h"
-#include "m_random.h"
-#include "i_system.h"
+#include "misc/bbox.h"
+#include "misc/random.h"
+#include "system/system.h"
 
-#include "doomdef.h"
-#include "p_local.h"
+#include "global/doomdef.h"
+#include "logic/local.h"
 
-#include "s_sound.h"
+#include "sound/sound.h"
 
 // State.
-#include "doomstat.h"
-#include "r_state.h"
+#include "global/doomstat.h"
+#include "render/state.h"
 // Data.
-#include "sounds.h"
+#include "sound/sounds.h"
 
 
 fixed_t		tmbbox[4];

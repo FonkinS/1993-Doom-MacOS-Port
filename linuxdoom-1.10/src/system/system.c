@@ -32,18 +32,18 @@ rcsid[] = "$Id: m_bbox.c,v 1.1 1997/02/03 22:45:10 b1 Exp $";
 #include <sys/time.h>
 #include <unistd.h>
 
-#include "doomdef.h"
-#include "m_misc.h"
-#include "i_video.h"
-#include "i_sound.h"
+#include "global/doomdef.h"
+#include "misc/misc.h"
+#include "system/video.h"
+#include "system/sound.h"
 
-#include "d_net.h"
-#include "g_game.h"
+#include "init/net.h"
+#include "main/game.h"
 
 #ifdef __GNUG__
 #pragma implementation "i_system.h"
 #endif
-#include "i_system.h"
+#include "system/system.h"
 
 
 

@@ -24,8 +24,8 @@
 #define __F_FINALE__
 
 
-#include "doomtype.h"
-#include "d_event.h"
+#include "global/doomtype.h"
+#include "init/event.h"
 //
 // FINALE
 //

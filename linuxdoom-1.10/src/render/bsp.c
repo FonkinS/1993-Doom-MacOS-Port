@@ -26,21 +26,21 @@ static const char
 rcsid[] = "$Id: r_bsp.c,v 1.4 1997/02/03 22:45:12 b1 Exp $";
 
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
-#include "m_bbox.h"
+#include "misc/bbox.h"
 
-#include "i_system.h"
+#include "system/system.h"
 
-#include "r_main.h"
-#include "r_plane.h"
-#include "r_things.h"
+#include "render/main.h"
+#include "render/plane.h"
+#include "render/things.h"
 
 // State.
-#include "doomstat.h"
-#include "r_state.h"
+#include "global/doomstat.h"
+#include "render/state.h"
 
-//#include "r_local.h"
+#include "render/local.h"
 
 
 

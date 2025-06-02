@@ -26,26 +26,26 @@ static const char rcsid[] = "$Id: am_map.c,v 1.4 1997/02/03 21:24:33 b1 Exp $";
 #include <stdio.h>
 
 
-#include "z_zone.h"
-#include "doomdef.h"
-#include "st_stuff.h"
-#include "p_local.h"
-#include "w_wad.h"
+#include "zone/zone.h"
+#include "global/doomdef.h"
+#include "status/stuff.h"
+#include "logic/local.h"
+#include "wad/wad.h"
 
-#include "m_cheat.h"
-#include "i_system.h"
+#include "misc/cheat.h"
+#include "system/system.h"
 
 // Needs access to LFB.
-#include "v_video.h"
+#include "graphics/video.h"
 
 // State.
-#include "doomstat.h"
-#include "r_state.h"
+#include "global/doomstat.h"
+#include "render/state.h"
 
 // Data.
-#include "dstrings.h"
+#include "misc/strings.h"
 
-#include "am_map.h"
+#include "automap/map.h"
 
 
 // For use if I do walls with outsides/insides

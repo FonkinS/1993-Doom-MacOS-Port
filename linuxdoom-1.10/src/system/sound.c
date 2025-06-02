@@ -48,15 +48,15 @@ rcsid[] = "$Id: i_unix.c,v 1.5 1997/02/03 22:45:10 b1 Exp $";
 #include <time.h>
 #include <signal.h>
 
-#include "z_zone.h"
+#include "zone/zone.h"
 
-#include "i_system.h"
-#include "i_sound.h"
-#include "m_argv.h"
-#include "m_misc.h"
-#include "w_wad.h"
+#include "system/system.h"
+#include "system/sound.h"
+#include "misc/argv.h"
+#include "misc/misc.h"
+#include "wad/wad.h"
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
 // UNIX hack, to be removed.
 #ifdef SNDSERV

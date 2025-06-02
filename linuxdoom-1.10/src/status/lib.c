@@ -27,20 +27,20 @@ rcsid[] = "$Id: st_lib.c,v 1.4 1997/02/03 16:47:56 b1 Exp $";
 
 #include <ctype.h>
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
-#include "z_zone.h"
-#include "v_video.h"
+#include "zone/zone.h"
+#include "graphics/video.h"
 
-#include "m_swap.h"
+#include "misc/swap.h"
 
-#include "i_system.h"
+#include "system/system.h"
 
-#include "w_wad.h"
+#include "wad/wad.h"
 
-#include "st_stuff.h"
-#include "st_lib.h"
-#include "r_local.h"
+#include "status/stuff.h"
+#include "status/lib.h"
+#include "render/local.h"
 
 
 // in AM_map.c

@@ -29,15 +29,15 @@ rcsid[] = "$Id: r_plane.c,v 1.4 1997/02/03 16:47:55 b1 Exp $";
 
 #include <stdlib.h>
 
-#include "i_system.h"
-#include "z_zone.h"
-#include "w_wad.h"
+#include "system/system.h"
+#include "zone/zone.h"
+#include "wad/wad.h"
 
-#include "doomdef.h"
-#include "doomstat.h"
+#include "global/doomdef.h"
+#include "global/doomstat.h"
 
-#include "r_local.h"
-#include "r_sky.h"
+#include "render/local.h"
+#include "render/sky.h"
 
 
 

@@ -27,15 +27,15 @@ static const char
 rcsid[] = "$Id: info.c,v 1.3 1997/01/26 07:45:00 b1 Exp $";
 
 // Data.
-#include "sounds.h"
-#include "m_fixed.h"
+#include "sound/sounds.h"
+#include "misc/fixed.h"
 
 #ifdef __GNUG__
-#pragma implementation "info.h"
+#pragma implementation "global/info.h"
 #endif
-#include "info.h"
+#include "global/info.h"
 
-#include "p_mobj.h"
+#include "logic/mobj.h"
 
 char *sprnames[NUMSPRITES] = {
     "TROO","SHTG","PUNG","PISG","PISF","SHTF","SHT2","CHGG","CHGF","MISG",

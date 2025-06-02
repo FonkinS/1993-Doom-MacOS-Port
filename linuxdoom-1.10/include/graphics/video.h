@@ -25,12 +25,12 @@
 #ifndef __V_VIDEO__
 #define __V_VIDEO__
 
-#include "doomtype.h"
+#include "global/doomtype.h"
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
 // Needed because we are refering to patches.
-#include "r_data.h"
+#include "render/data.h"
 
 //
 // VIDEO

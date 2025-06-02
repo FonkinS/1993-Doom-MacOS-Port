@@ -24,7 +24,7 @@
 #define __R_PLANE__
 
 
-#include "r_data.h"
+#include "render/data.h"
 
 #ifdef __GNUG__
 #pragma interface

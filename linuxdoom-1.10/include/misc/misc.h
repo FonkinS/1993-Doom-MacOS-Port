@@ -24,7 +24,7 @@
 #define __M_MISC__
 
 
-#include "doomtype.h"
+#include "global/doomtype.h"
 //
 // MISC
 //

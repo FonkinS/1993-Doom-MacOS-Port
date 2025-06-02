@@ -25,23 +25,23 @@ rcsid[] = "$Id: hu_stuff.c,v 1.4 1997/02/03 16:47:52 b1 Exp $";
 
 #include <ctype.h>
 
-#include "doomdef.h"
+#include "global/doomdef.h"
 
-#include "z_zone.h"
+#include "zone/zone.h"
 
-#include "m_swap.h"
+#include "misc/swap.h"
 
-#include "hu_stuff.h"
-#include "hu_lib.h"
-#include "w_wad.h"
+#include "hud/stuff.h"
+#include "hud/lib.h"
+#include "wad/wad.h"
 
-#include "s_sound.h"
+#include "sound/sound.h"
 
-#include "doomstat.h"
+#include "global/doomstat.h"
 
 // Data.
-#include "dstrings.h"
-#include "sounds.h"
+#include "misc/strings.h"
+#include "sound/sounds.h"
 
 //
 // Locally used constants, shortcuts.

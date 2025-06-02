@@ -24,7 +24,7 @@
 #define __P_LOCAL__
 
 #ifndef __R_LOCAL__
-#include "r_local.h"
+#include "render/local.h"
 #endif
 
 #define FLOATSPEED		(FRACUNIT*4)
@@ -276,7 +276,7 @@ P_DamageMobj
 //
 // P_SPEC
 //
-#include "p_spec.h"
+#include "logic/spec.h"
 
 
 #endif	// __P_LOCAL__
