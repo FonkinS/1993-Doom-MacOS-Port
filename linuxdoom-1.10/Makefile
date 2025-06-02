@@ -11,6 +11,7 @@ LIBS=-lm
 
 SOURCE_DIR = src
 BUILD_DIR = build
+WAD_DIR = WAD
 OBJECT_DIR = $(BUILD_DIR)/objects
 
 SOURCES = $(shell find $(SOURCE_DIR) -name '*.c')
@@ -37,5 +38,5 @@ $(OBJECT_DIR)/%.o:	$(SOURCE_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: $(OUTPUT_NAME)
-	./$< -file WAD/doom1.wad
+	./$<
 

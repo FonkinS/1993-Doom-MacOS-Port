@@ -1,4 +1,5 @@
 build/*
 compile_commands.json
 .cache/*
-.DS_Store/*
+*.DS_Store
+.clang-format
