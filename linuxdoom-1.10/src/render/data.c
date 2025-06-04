@@ -80,7 +80,8 @@ typedef struct {
 	boolean masked;
 	short width;
 	short height;
-	void **columndirectory; // OBSOLETE
+	//void **columndirectory; // OBSOLETE
+    int OBSOLETE;
 	short patchcount;
 	mappatch_t patches[1];
 } maptexture_t;
@@ -406,7 +407,7 @@ void R_InitTextures(void) {
 	numtextures1 = LONG(*maptex);
 	maxoff = W_LumpLength(W_GetNumForName("TEXTURE1"));
 	directory = maptex + 1;
-
+    
 	if (W_CheckNumForName("TEXTURE2") != -1) {
 		maptex2 = W_CacheLumpName("TEXTURE2", PU_STATIC);
 		numtextures2 = LONG(*maptex2);
@@ -418,13 +419,13 @@ void R_InitTextures(void) {
 	}
 	numtextures = numtextures1 + numtextures2;
 
-	textures = Z_Malloc(numtextures * 4, PU_STATIC, 0);
-	texturecolumnlump = Z_Malloc(numtextures * 4, PU_STATIC, 0);
-	texturecolumnofs = Z_Malloc(numtextures * 4, PU_STATIC, 0);
-	texturecomposite = Z_Malloc(numtextures * 4, PU_STATIC, 0);
-	texturecompositesize = Z_Malloc(numtextures * 4, PU_STATIC, 0);
-	texturewidthmask = Z_Malloc(numtextures * 4, PU_STATIC, 0);
-	textureheight = Z_Malloc(numtextures * 4, PU_STATIC, 0);
+	textures = Z_Malloc(numtextures * 8, PU_STATIC, 0);
+	texturecolumnlump = Z_Malloc(numtextures * 8, PU_STATIC, 0);
+	texturecolumnofs = Z_Malloc(numtextures * 8, PU_STATIC, 0);
+	texturecomposite = Z_Malloc(numtextures * 8, PU_STATIC, 0);
+	texturecompositesize = Z_Malloc(numtextures * 8, PU_STATIC, 0);
+	texturewidthmask = Z_Malloc(numtextures * 8, PU_STATIC, 0);
+	textureheight = Z_Malloc(numtextures * 8, PU_STATIC, 0);
 
 	totalwidth = 0;
 
@@ -458,10 +459,10 @@ void R_InitTextures(void) {
 
 		mtexture = (maptexture_t *)((byte *)maptex + offset);
 
-		/*texture = textures[i] =
+		texture = textures[i] =
 			Z_Malloc (sizeof(texture_t)
 					  + sizeof(texpatch_t)*(SHORT(mtexture->patchcount)-1),
-					  PU_STATIC, 0);*/
+					  PU_STATIC, 0);
 
 		texture->width = SHORT(mtexture->width);
 		texture->height = SHORT(mtexture->height);
@@ -470,8 +471,6 @@ void R_InitTextures(void) {
 		memcpy(texture->name, mtexture->name, sizeof(texture->name));
 		mpatch = &mtexture->patches[0];
 		patch = &texture->patches[0];
-
-		printf("PATCH COUNT %i\n", texture->patchcount);
 
 		for (j = 0; j < texture->patchcount; j++, mpatch++, patch++) {
 			patch->originx = SHORT(mpatch->originx);
@@ -509,6 +508,7 @@ void R_InitTextures(void) {
 	for (i = 0; i < numtextures; i++)
 		texturetranslation[i] = i;
 }
+
 
 //
 // R_InitFlats
@@ -567,7 +567,7 @@ void R_InitColormaps(void) {
 	lump = W_GetNumForName("COLORMAP");
 	length = W_LumpLength(lump) + 255;
 	colormaps = Z_Malloc(length, PU_STATIC, 0);
-	colormaps = (byte *)(((int)colormaps + 255) & ~0xff);
+	colormaps = (byte *)(((long long)colormaps + 255) & ~0xff);
 	W_ReadLump(lump, colormaps);
 }
 
