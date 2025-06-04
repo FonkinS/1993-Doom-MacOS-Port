@@ -7,7 +7,6 @@ endif
 
 #LDFLAGS=-L/usr/X11R6/lib
 #LIBS=-lXext -lX11 -lnsl -lm
-LIBS=-lm
 
 SOURCE_DIR = src
 BUILD_DIR = build
@@ -20,7 +19,6 @@ OBJECTS = $(patsubst $(SOURCE_DIR)/%.c, $(OBJECT_DIR)/%.o, $(SOURCES))
 OUTPUT_NAME = $(BUILD_DIR)/doom
 
 all: $(OUTPUT_NAME)
-	bear -- $(LIBS) $(CFLAGS)
 
 #all:
 #	echo $(SOURCES)
