@@ -37,7 +37,7 @@ static const char rcsid[] = "$Id: v_video.c,v 1.5 1997/02/03 22:45:13 b1 Exp $";
 #include "graphics/video.h"
 
 // Each screen is [SCREENWIDTH*SCREENHEIGHT];
-byte *screens[5];
+//byte *screens[5]; TODO NOW IN VIDEO.M
 
 int dirtybox[4];
 
@@ -288,7 +288,7 @@ void V_DrawPatchFlipped(int x, int y, int scrn, patch_t *patch) {
 void V_DrawPatchDirect(int x, int y, int scrn, patch_t *patch) {
 	V_DrawPatch(x, y, scrn, patch);
 
-	/*
+	
 	int		count;
 	int		col;
 	column_t*	column;
@@ -312,12 +312,14 @@ void V_DrawPatchDirect(int x, int y, int scrn, patch_t *patch) {
 #endif
 
 	//	V_MarkRect (x, y, SHORT(patch->width), SHORT(patch->height));
-	desttop = destscreen + y*SCREENWIDTH/4 + (x>>2);
+	//desttop = destscreen + y*SCREENWIDTH/4 + (x>>2);
+	desttop = screens[0] + y*SCREENWIDTH/4 + (x>>2);
+    //TODO WHY THIS HUUHHH???
 
 	w = SHORT(patch->width);
 	for ( col = 0 ; col<w ; col++)
 	{
-	outp (SC_INDEX+1,1<<(x&3));
+	//outp (SC_INDEX+1,1<<(x&3)); TODO Windows?? Not a thing on UNIX??
 	column = (column_t *)((byte *)patch + LONG(patch->columnofs[col]));
 
 	// step through the posts in a column
@@ -338,7 +340,7 @@ void V_DrawPatchDirect(int x, int y, int scrn, patch_t *patch) {
 	}
 	if ( ((++x)&3) == 0 )
 		desttop++;	// go to next byte, not next plane
-	}*/
+	}
 }
 
 //
