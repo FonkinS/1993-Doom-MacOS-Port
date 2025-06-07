@@ -1,7 +1,12 @@
+#include "global/doomdef.h"
+#include "init/main.h"
+#include "system/video.h"
 #include <AppKit/AppKit.h>
 #import <Cocoa/Cocoa.h>
 #include <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
+
+#include "init/event.h"
 
 static NSWindow* window = nil;
 static NSImageView* imageView = nil;
@@ -35,16 +40,75 @@ unsigned char* palette;
 @end
 
 
-int getkey(void) {
-    int rc;
+unsigned char keyCodeToASCII[] = {
+    65,83,68,70,72,71,90,88,
+    67,86, 0,66,81,87,69,82,
+    89,84,49,50,51,52,54,53,
+    61,57,55,45,56,48,93,79,
+    85,91,73,80, 0,76,74, 0,
+    75, 0, 0, 0, 9, 78,77,0
+};
+
+
+int getKey(unsigned int k) {
+    int rc = 0;
+    switch (k) {
+        case kVK_LeftArrow: rc = KEY_LEFTARROW; break;
+        case kVK_RightArrow: rc = KEY_RIGHTARROW; break;
+        case kVK_UpArrow: rc = KEY_UPARROW; break;
+        case kVK_DownArrow: rc = KEY_DOWNARROW; break;
+        case kVK_Escape: rc = KEY_ESCAPE; break;
+        case kVK_Return: rc = KEY_ENTER; break;
+        case kVK_Tab: rc = KEY_TAB; break;
+        case kVK_F1: rc = KEY_F1; break;
+        case kVK_F2: rc = KEY_F2; break;
+        case kVK_F3: rc = KEY_F3; break;
+        case kVK_F4: rc = KEY_F4; break;
+        case kVK_F5: rc = KEY_F5; break;
+        case kVK_F6: rc = KEY_F6; break;
+        case kVK_F7: rc = KEY_F7; break;
+        case kVK_F8: rc = KEY_F8; break;
+        case kVK_F9: rc = KEY_F9; break;
+        case kVK_Delete: rc = KEY_BACKSPACE; break;
+        case kVK_ANSI_Equal: rc = KEY_EQUALS; break;
+        case kVK_ANSI_Minus: rc = KEY_MINUS; break;
+        case kVK_RightShift:
+        case kVK_Shift: rc = KEY_RSHIFT; break;
+        case kVK_RightControl:
+        case kVK_Control: rc = KEY_RCTRL; break;
+        case kVK_RightOption:
+        case kVK_Option: rc = KEY_RALT; break;
+
+        case kVK_Space: rc = 0x20;
+        
+        
+        default:
+            if (k < 0x30)
+                rc = keyCodeToASCII[k];
+
+            break;
+    }
 
 
     return rc;
 }
 
 
-void I_GetEvent(void) {
+void handleEvent(NSEvent* e) {
+    event_t event;
+    unsigned long key;
+    switch (e.type) {
+        case NSEventTypeKeyDown:
+            key = getKey(e.keyCode);
+            event.type = ev_keydown;
+            event.data1 = key;
+            break;
+        default:
+            break;
+    }
 
+
+    D_PostEvent(&event);
 }
 
 
@@ -139,6 +203,8 @@ void I_FinishUpdate() {
                                    inMode:NSDefaultRunLoopMode 
                                   dequeue: YES])) {
             [NSApp sendEvent:event];
+            handleEvent(event);
+
         }
         [NSApp updateWindows];
     }

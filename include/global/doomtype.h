@@ -29,7 +29,9 @@
 #ifdef __cplusplus
 typedef bool boolean;
 #else
+#ifndef OBJC_AVAILABLE
 typedef enum { false, true } boolean;
+#endif
 #endif
 typedef unsigned char byte;
 #endif
