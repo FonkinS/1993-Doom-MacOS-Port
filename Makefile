@@ -2,7 +2,7 @@ CC=clang
 CFLAGS=-g -Wall -DNORMALUNIX -DLINUX --include-directory=include 
 
 ifdef DEBUG
-	CFLAGS += -O0 -Wno-unused-const-variable -Wno-unused-but-set-variable
+	CFLAGS += -O0 -Wno-unused-const-variable -Wno-unused-but-set-variable -Werror=pointer-to-int-cast -Werror=int-to-void-pointer-cast
 endif
 
 #LDFLAGS=-L/usr/X11R6/lib

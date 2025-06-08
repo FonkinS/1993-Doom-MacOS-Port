@@ -135,7 +135,8 @@ int eventtail;
 //
 void D_PostEvent(event_t *ev) {
 	events[eventhead] = *ev;
-	eventhead = (++eventhead) & (MAXEVENTS - 1);
+	int k = (++eventhead) & (MAXEVENTS - 1);
+    eventhead = k;
 }
 
 //
@@ -149,8 +150,10 @@ void D_ProcessEvents(void) {
 	if ((gamemode == commercial) && (W_CheckNumForName("map01") < 0))
 		return;
 
+    int k = eventtail;
 	for (; eventtail != eventhead;
-		 eventtail = (++eventtail) & (MAXEVENTS - 1)) {
+		 k = (++eventtail) & (MAXEVENTS - 1)) {
+        eventtail = k;
 		ev = &events[eventtail];
 		if (M_Responder(ev))
 			continue; // menu ate the event
@@ -1014,14 +1017,15 @@ void D_DoomMain(void) {
 	ST_Init();
 
 	// check for a driver that wants intermission stats
-	p = M_CheckParm("-statcopy");
+    // TODO FIX -statcopy
+	/*p = M_CheckParm("-statcopy");
 	if (p && p < myargc - 1) {
 		// for statistics driver
 		extern void *statcopy;
 
 		statcopy = (void *)atoi(myargv[p + 1]);
 		printf("External statistics registered.\n");
-	}
+	}*/
 
 	// start the apropriate game based on parms
 	p = M_CheckParm("-record");

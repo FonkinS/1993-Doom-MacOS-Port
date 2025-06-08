@@ -503,7 +503,7 @@ void R_InitTextures(void) {
 		R_GenerateLookup(i);
 
 	// Create translation table for global animation.
-	texturetranslation = Z_Malloc((numtextures + 1) * 4, PU_STATIC, 0);
+	texturetranslation = Z_Malloc((numtextures + 1) * 8, PU_STATIC, 0);
 
 	for (i = 0; i < numtextures; i++)
 		texturetranslation[i] = i;
@@ -521,7 +521,7 @@ void R_InitFlats(void) {
 	numflats = lastflat - firstflat + 1;
 
 	// Create translation table for global animation.
-	flattranslation = Z_Malloc((numflats + 1) * 4, PU_STATIC, 0);
+	flattranslation = Z_Malloc((numflats + 1) * 8, PU_STATIC, 0);
 
 	for (i = 0; i < numflats; i++)
 		flattranslation[i] = i;
@@ -541,9 +541,9 @@ void R_InitSpriteLumps(void) {
 	lastspritelump = W_GetNumForName("S_END") - 1;
 
 	numspritelumps = lastspritelump - firstspritelump + 1;
-	spritewidth = Z_Malloc(numspritelumps * 4, PU_STATIC, 0);
-	spriteoffset = Z_Malloc(numspritelumps * 4, PU_STATIC, 0);
-	spritetopoffset = Z_Malloc(numspritelumps * 4, PU_STATIC, 0);
+	spritewidth = Z_Malloc(numspritelumps * 8, PU_STATIC, 0);
+	spriteoffset = Z_Malloc(numspritelumps * 8, PU_STATIC, 0);
+	spritetopoffset = Z_Malloc(numspritelumps * 8, PU_STATIC, 0);
 
 	for (i = 0; i < numspritelumps; i++) {
 		if (!(i & 63))

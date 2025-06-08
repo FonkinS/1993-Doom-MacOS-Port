@@ -284,6 +284,7 @@ void P_LoadThings(int lump) {
 		spawn = true;
 
 		// Do not spawn cool, new monsters if !commercial
+        // TODO REMOVE CAUSE THIS NOT COOL
 		if (gamemode != commercial) {
 			switch (mt->type) {
 			case 68: // Arachnotron
@@ -479,7 +480,7 @@ void P_GroupLines(void) {
 	}
 
 	// build line tables for each sector
-	linebuffer = Z_Malloc(total * 4, PU_LEVEL, 0);
+	linebuffer = Z_Malloc(total * 8, PU_LEVEL, 0);
 	sector = sectors;
 	for (i = 0; i < numsectors; i++, sector++) {
 		M_ClearBox(bbox);

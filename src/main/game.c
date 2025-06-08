@@ -441,8 +441,8 @@ void G_DoLoadLevel(void) {
 	joyxmove = joyymove = 0;
 	mousex = mousey = 0;
 	sendpause = sendsave = paused = false;
-	memset(mousebuttons, 0, sizeof(mousebuttons));
-	memset(joybuttons, 0, sizeof(joybuttons));
+	memset(mousebuttons, 0, sizeof(*mousebuttons)*4);
+	memset(joybuttons, 0, sizeof(*joybuttons)*4);
 }
 
 //
@@ -1076,7 +1076,7 @@ void G_DoLoadGame(void) {
 	// skip the description field
 	memset(vcheck, 0, sizeof(vcheck));
 	sprintf(vcheck, "version %i", VERSION);
-	if (strcmp(save_p, vcheck))
+	if (strcmp((const char*)save_p, vcheck))
 		return; // bad version
 	save_p += VERSIONSIZE;
 
@@ -1395,6 +1395,7 @@ void G_DoPlayDemo(void) {
 
 	gameaction = ga_nothing;
 	demobuffer = demo_p = W_CacheLumpName(defdemoname, PU_STATIC);
+    printf("VERSIONS: %i %i\n", *(demo_p), VERSION);
 	if (*demo_p++ != VERSION) {
 		fprintf(stderr, "Demo is from a different game version!\n");
 		gameaction = ga_nothing;

@@ -104,6 +104,7 @@ int wipe_exitColorXForm(int width, int height, int ticks) { return 0; }
 static int *y;
 
 int wipe_initMelt(int width, int height, int ticks) {
+    printf("HIIIIIIIIIIIIIIIIIIII\n\\n\n\n\n");
 	int i, r;
 
 	// copy start screen to main screen
