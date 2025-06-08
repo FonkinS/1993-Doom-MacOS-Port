@@ -208,8 +208,7 @@ void I_FinishUpdate() {
                                    inMode:NSDefaultRunLoopMode 
                                   dequeue: YES])) {
             handleEvent(event);
-            if (event.type != NSEventTypeKeyDown && event.type != NSEventTypeKeyUp)
-                [NSApp sendEvent:event];
+            [NSApp sendEvent:event];
 
         }
         [NSApp updateWindows];
@@ -241,7 +240,7 @@ void I_FinishUpdate() {
 
 void I_ReadScreen(unsigned char *src) {
     //unsigned char* data = [bitmap bitmapData];
-    //memcpy(src, data, 320*200*4);
+    memcpy(src, screens[0], SCREENWIDTH * SCREENHEIGHT);
 }
 
 void I_StartFrame() {
