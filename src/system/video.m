@@ -103,6 +103,11 @@ void handleEvent(NSEvent* e) {
             event.type = ev_keydown;
             event.data1 = key;
             break;
+        case NSEventTypeKeyUp:
+            key = getKey(e.keyCode);
+            event.type = ev_keyup;
+            event.data1 = key;
+            break;
         default:
             break;
     }
@@ -202,8 +207,9 @@ void I_FinishUpdate() {
                                 untilDate:[NSDate distantPast] 
                                    inMode:NSDefaultRunLoopMode 
                                   dequeue: YES])) {
-            [NSApp sendEvent:event];
             handleEvent(event);
+            if (event.type != NSEventTypeKeyDown && event.type != NSEventTypeKeyUp)
+                [NSApp sendEvent:event];
 
         }
         [NSApp updateWindows];
