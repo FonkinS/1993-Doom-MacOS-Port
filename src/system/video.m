@@ -124,6 +124,18 @@ int getKey(unsigned int k) {
     D_PostEvent(&d_event);
 }
 
+- (void)flagsChanged:(NSEvent *)event {
+    int key = getKey(event.keyCode);
+    unsigned long flags = event.modifierFlags;
+    event_t d_event;
+    if (key == KEY_RSHIFT)
+        d_event.type = flags & NSEventModifierFlagShift ? ev_keydown : ev_keyup;
+    if (key == KEY_RCTRL)
+        d_event.type = flags & NSEventModifierFlagControl ? ev_keydown : ev_keyup;
+    d_event.data1 = key;
+    D_PostEvent(&d_event);
+}
+
 @end
 static Window* window = nil;
 
