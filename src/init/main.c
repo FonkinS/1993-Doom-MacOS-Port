@@ -150,10 +150,8 @@ void D_ProcessEvents(void) {
 	if ((gamemode == commercial) && (W_CheckNumForName("map01") < 0))
 		return;
 
-    int k = eventtail;
 	for (; eventtail != eventhead;
-		 k = (++eventtail) & (MAXEVENTS - 1)) {
-        eventtail = k;
+		 eventtail = (++eventtail) & (MAXEVENTS - 1)) {
 		ev = &events[eventtail];
 		if (M_Responder(ev))
 			continue; // menu ate the event

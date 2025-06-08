@@ -74,6 +74,7 @@ int getKey(unsigned int k) {
         case kVK_ANSI_Minus: rc = KEY_MINUS; break;
         case kVK_RightShift:
         case kVK_Shift: rc = KEY_RSHIFT; break;
+        case 6: // TODO GET PROPER CONTROL
         case kVK_RightControl:
         case kVK_Control: rc = KEY_RCTRL; break;
         case kVK_RightOption:
