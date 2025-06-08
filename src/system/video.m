@@ -8,7 +8,6 @@
 
 #include "init/event.h"
 
-static NSWindow* window = nil;
 static NSImageView* imageView = nil;
 static NSBitmapImageRep* bitmap = nil;
 static BOOL windowShouldClose = NO;
@@ -38,6 +37,7 @@ unsigned char* palette;
 } 
 
 @end
+
 
 
 unsigned char keyCodeToASCII[] = {
@@ -94,27 +94,38 @@ int getKey(unsigned int k) {
 }
 
 
-void handleEvent(NSEvent* e) {
-    event_t event;
-    unsigned long key;
-    switch (e.type) {
-        case NSEventTypeKeyDown:
-            key = getKey(e.keyCode);
-            event.type = ev_keydown;
-            event.data1 = key;
-            break;
-        case NSEventTypeKeyUp:
-            key = getKey(e.keyCode);
-            event.type = ev_keyup;
-            event.data1 = key;
-            break;
-        default:
-            break;
-    }
+@interface Window : NSWindow
+@end
 
+@implementation Window
 
-    D_PostEvent(&event);
+- (BOOL) canBecomeKeyWindow {
+    return YES;
 }
+
+- (BOOL) canBecomeMainWindow {
+    return YES;
+}
+
+- (void)keyDown:(NSEvent *)event {
+    int key = getKey(event.keyCode);
+    event_t d_event;
+    d_event.type = ev_keydown;
+    d_event.data1 = key;
+    D_PostEvent(&d_event);
+}
+
+- (void)keyUp:(NSEvent *)event {
+    int key = getKey(event.keyCode);
+    event_t d_event;
+    d_event.type = ev_keyup;
+    d_event.data1 = key;
+    D_PostEvent(&d_event);
+}
+
+@end
+static Window* window = nil;
+
 
 
 void I_InitGraphics() {
@@ -126,7 +137,7 @@ void I_InitGraphics() {
         [NSApp setDelegate:appDelegate];
 
         NSRect frame = NSMakeRect(0, 0, WIDTH, HEIGHT);
-        window = [[NSWindow alloc] initWithContentRect:frame 
+        window = [[Window alloc] initWithContentRect:frame 
                       styleMask:NSWindowStyleMaskTitled |
                         NSWindowStyleMaskClosable |
                         /*NSWindowStyleMaskResizable |*/
@@ -207,7 +218,6 @@ void I_FinishUpdate() {
                                 untilDate:[NSDate distantPast] 
                                    inMode:NSDefaultRunLoopMode 
                                   dequeue: YES])) {
-            handleEvent(event);
             [NSApp sendEvent:event];
 
         }
