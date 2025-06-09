@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 	myargv = argv;
 
 
-	D_DoomMain();
+	D_DoomMain(argv[0]);
 
 	return 0;
 }

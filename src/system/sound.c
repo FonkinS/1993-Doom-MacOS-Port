@@ -664,6 +664,7 @@ void I_InitSound() {
 		fprintf(stderr, "Could not open /dev/dsp\n");
 
 	i = 11 | (2 << 16);
+    /*
 	myioctl(audio_fd, SNDCTL_DSP_SETFRAGMENT, &i);
 	myioctl(audio_fd, SNDCTL_DSP_RESET, 0);
 
@@ -680,6 +681,7 @@ void I_InitSound() {
 		myioctl(audio_fd, SNDCTL_DSP_SETFMT, &i);
 	else
 		fprintf(stderr, "Could not play signed 16 data\n");
+        */
 
 	fprintf(stderr, " configured audio device\n");
 

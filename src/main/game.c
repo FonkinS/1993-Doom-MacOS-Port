@@ -254,21 +254,21 @@ void G_BuildTiccmd(ticcmd_t *cmd) {
 		tspeed = speed;
 
 	// let movement keys cancel each other out
-	if (strafe) {
-		if (gamekeydown[key_right]) {
-			// fprintf(stderr, "strafe right\n");
-			side += sidemove[speed];
-		}
-		if (gamekeydown[key_left]) {
-			//	fprintf(stderr, "strafe left\n");
-			side -= sidemove[speed];
-		}
-		if (joyxmove > 0)
-			side += sidemove[speed];
-		if (joyxmove < 0)
-			side -= sidemove[speed];
+	//if (strafe) {
+    if (gamekeydown[key_right]) {
+        // fprintf(stderr, "strafe right\n");
+        side += sidemove[speed];
+    }
+    if (gamekeydown[key_left]) {
+        //	fprintf(stderr, "strafe left\n");
+        side -= sidemove[speed];
+    }
+    if (joyxmove > 0)
+        side += sidemove[speed];
+    if (joyxmove < 0)
+        side -= sidemove[speed];
 
-	} else {
+	/*} else {
 		if (gamekeydown[key_right])
 			cmd->angleturn -= angleturn[tspeed];
 		if (gamekeydown[key_left])
@@ -277,7 +277,7 @@ void G_BuildTiccmd(ticcmd_t *cmd) {
 			cmd->angleturn -= angleturn[tspeed];
 		if (joyxmove < 0)
 			cmd->angleturn += angleturn[tspeed];
-	}
+	}*/
 
 	if (gamekeydown[key_up]) {
 		// fprintf(stderr, "up\n");
@@ -358,10 +358,10 @@ void G_BuildTiccmd(ticcmd_t *cmd) {
 		}
 	}
 
-	forward += mousey;
-	if (strafe)
+	//forward += mousey; TODO CHANGED
+	/*if (strafe)
 		side += mousex * 2;
-	else
+	else*/
 		cmd->angleturn -= mousex * 0x8;
 
 	mousex = mousey = 0;

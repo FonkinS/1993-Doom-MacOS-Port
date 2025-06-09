@@ -3,6 +3,7 @@
 #include "system/video.h"
 #include <AppKit/AppKit.h>
 #import <Cocoa/Cocoa.h>
+#include <CoreGraphics/CoreGraphics.h>
 #include <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
 
@@ -16,6 +17,11 @@ unsigned char *screens[5];
 extern unsigned char gammatable[5][256];
 
 unsigned char* palette;
+
+enum {INPUT_CLASSIC, INPUT_MODERN};
+int input_type = INPUT_MODERN;
+
+BOOL mouse_out = false; // Mouse not hidden
 
 #define SCALE 2
 #define WIDTH 640
@@ -52,42 +58,46 @@ unsigned char keyCodeToASCII[] = {
 
 int getKey(unsigned int k) {
     int rc = 0;
-    switch (k) {
-        case kVK_LeftArrow: rc = KEY_LEFTARROW; break;
-        case kVK_RightArrow: rc = KEY_RIGHTARROW; break;
-        case kVK_UpArrow: rc = KEY_UPARROW; break;
-        case kVK_DownArrow: rc = KEY_DOWNARROW; break;
-        case kVK_Escape: rc = KEY_ESCAPE; break;
-        case kVK_Return: rc = KEY_ENTER; break;
-        case kVK_Tab: rc = KEY_TAB; break;
-        case kVK_F1: rc = KEY_F1; break;
-        case kVK_F2: rc = KEY_F2; break;
-        case kVK_F3: rc = KEY_F3; break;
-        case kVK_F4: rc = KEY_F4; break;
-        case kVK_F5: rc = KEY_F5; break;
-        case kVK_F6: rc = KEY_F6; break;
-        case kVK_F7: rc = KEY_F7; break;
-        case kVK_F8: rc = KEY_F8; break;
-        case kVK_F9: rc = KEY_F9; break;
-        case kVK_Delete: rc = KEY_BACKSPACE; break;
-        case kVK_ANSI_Equal: rc = KEY_EQUALS; break;
-        case kVK_ANSI_Minus: rc = KEY_MINUS; break;
-        case kVK_RightShift:
-        case kVK_Shift: rc = KEY_RSHIFT; break;
-        case 6: // TODO GET PROPER CONTROL
-        case kVK_RightControl:
-        case kVK_Control: rc = KEY_RCTRL; break;
-        case kVK_RightOption:
-        case kVK_Option: rc = KEY_RALT; break;
+    if (input_type == INPUT_CLASSIC) {
+        switch (k) {
+            case kVK_LeftArrow: rc = KEY_LEFTARROW; break;
+            case kVK_RightArrow: rc = KEY_RIGHTARROW; break;
+            case kVK_UpArrow: rc = KEY_UPARROW; break;
+            case kVK_DownArrow: rc = KEY_DOWNARROW; break;
+            case kVK_Escape: rc = KEY_ESCAPE; break;
+            case kVK_Return: rc = KEY_ENTER; break;
+            case 6:
+            case kVK_RightShift:
+            case kVK_Shift: rc = KEY_RSHIFT; break;
+            case 7: // TODO GET PROPER CONTROL
+            case kVK_Command:
+            case kVK_RightControl:
+            case kVK_Control: rc = KEY_RCTRL; break;
+            case 8:
+            case kVK_RightOption:
+            case kVK_Option: rc = KEY_RALT; break;
 
-        case kVK_Space: rc = 0x20;
-        
-        
-        default:
-            if (k < 0x30)
-                rc = keyCodeToASCII[k];
+            case kVK_Space: rc = 0x20;
 
-            break;
+            default:
+                if (k > 32) break;
+                rc = keyCodeToASCII[k]+32;
+                break;
+        }
+    } else if (input_type == INPUT_MODERN) {
+        switch (k) {
+            case 0x0: rc = KEY_LEFTARROW; break;
+            case 0x1: rc = KEY_DOWNARROW; break;
+            case 0x2: rc = KEY_RIGHTARROW; break;
+            case 0xD: rc = KEY_UPARROW; break;
+            case 0xE: rc = 0x20; break;
+            case kVK_Escape: 
+                [NSCursor unhide];
+                mouse_out = true; 
+                rc = KEY_ESCAPE;
+                break;
+            case kVK_Return: rc = KEY_ENTER; break;
+        }
     }
 
 
@@ -114,6 +124,8 @@ int getKey(unsigned int k) {
     d_event.type = ev_keydown;
     d_event.data1 = key;
     D_PostEvent(&d_event);
+
+   
 }
 
 - (void)keyUp:(NSEvent *)event {
@@ -122,19 +134,83 @@ int getKey(unsigned int k) {
     d_event.type = ev_keyup;
     d_event.data1 = key;
     D_PostEvent(&d_event);
+    if (input_type == INPUT_MODERN && (key == 0 || key == 2)) {
+        event_t d_event;
+        d_event.type = ev_keyup;
+        d_event.data1 = KEY_RALT;
+        D_PostEvent(&d_event);
+    }
 }
 
 - (void)flagsChanged:(NSEvent *)event {
     int key = getKey(event.keyCode);
     unsigned long flags = event.modifierFlags;
     event_t d_event;
-    if (key == KEY_RSHIFT)
-        d_event.type = flags & NSEventModifierFlagShift ? ev_keydown : ev_keyup;
-    if (key == KEY_RCTRL)
-        d_event.type = flags & NSEventModifierFlagControl ? ev_keydown : ev_keyup;
+    if (input_type == INPUT_CLASSIC) {
+        if (key == KEY_RSHIFT)
+            d_event.type = flags & NSEventModifierFlagShift ? ev_keydown : ev_keyup;
+        if (key == KEY_RCTRL)
+            d_event.type = flags & NSEventModifierFlagControl ? ev_keydown : ev_keyup;
+    }
+    if (key == KEY_RALT)
+        d_event.type = flags & NSEventModifierFlagOption ? ev_keydown : ev_keyup;
     d_event.data1 = key;
     D_PostEvent(&d_event);
 }
+
+BOOL mouse_state = false;
+- (void) mouseDown:(NSEvent *)event {
+    if (input_type != INPUT_MODERN) return;
+    event_t d_event;
+    d_event.type = ev_mouse;
+    d_event.data1 = mouse_state = 1;
+    d_event.data2 = 0;
+    d_event.data3 = 0;
+    D_PostEvent(&d_event);
+    [NSCursor hide];
+    mouse_out = false;
+}
+
+- (void) mouseUp:(NSEvent *)event {
+    if (input_type != INPUT_MODERN) return;
+    event_t d_event;
+    d_event.type = ev_mouse;
+    d_event.data1 = mouse_state = 0;
+    d_event.data2 = 0;
+    d_event.data3 = 0;
+    D_PostEvent(&d_event);
+
+}
+
+int warp_countdown = 0;
+float prev_delta_x = 0;
+float prev_delta_y = 0;
+- (void) mouseMoved:(NSEvent *)event {
+    if (input_type != INPUT_MODERN) return;
+    if (mouse_out) return;
+    event_t d_event;
+    NSPoint mpos = [NSEvent mouseLocation];
+    d_event.type = ev_mouse;
+    d_event.data1 = mouse_state;
+    if (!warp_countdown) d_event.data2 = [event deltaX] * 3;
+    else d_event.data2 = prev_delta_x;
+    if (!warp_countdown) d_event.data3 = -[event deltaY];
+    else d_event.data3 = -prev_delta_y;
+    D_PostEvent(&d_event);
+    
+    if (warp_countdown) warp_countdown--;
+
+    NSRect frame = [self frame];
+    NSPoint center = NSMakePoint(NSMidX(frame), NSMidY(frame)/2);
+
+    if (NSPointInRect(mpos, frame))
+        return;
+    CGWarpMouseCursorPosition(center);
+    warp_countdown = 2;
+    prev_delta_x = d_event.data2;
+    prev_delta_x = d_event.data3;
+}
+
 
 @end
 static Window* window = nil;
@@ -157,6 +233,7 @@ void I_InitGraphics() {
                         NSWindowStyleMaskMiniaturizable
                       backing:NSBackingStoreBuffered
                       defer:NO];
+        [window setAcceptsMouseMovedEvents:YES];
         [window setTitle:@"DOOM Engine on macOS"];
         [window makeKeyAndOrderFront:nil];
         [NSApp activateIgnoringOtherApps:YES];
@@ -203,6 +280,14 @@ void I_InitGraphics() {
         imageView.layer.magnificationFilter = kCAFilterNearest;
         imageView.layer.minificationFilter = kCAFilterNearest;
         [window.contentView addSubview:imageView];
+
+        NSPoint center = NSMakePoint(NSMidX(frame), NSMidY(frame)/2);
+        CGWarpMouseCursorPosition(center);
+
+        if (input_type == INPUT_MODERN)
+            [NSCursor hide];
+
+
     }
 }
 
@@ -213,7 +298,6 @@ void I_ShutdownGraphics() {
 }
 
 void I_SetPalette(unsigned char *pal) {
-    printf("Setting down Palette\n");
     palette = pal;
 }
 

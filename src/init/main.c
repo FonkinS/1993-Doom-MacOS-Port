@@ -492,7 +492,7 @@ void D_AddFile(char *file) {
 // to determine whether registered/commercial features
 // should be executed (notably loading PWAD's).
 //
-void IdentifyVersion(void) {
+void IdentifyVersion(char* execpath) {
 
 	char *doom1wad;
 	char *doomwad;
@@ -510,8 +510,16 @@ void IdentifyVersion(void) {
 	if (!doomwaddir)
 		doomwaddir = ".";
 
-	// TODOCHANGED
+	// TODO CHANGED
+#ifdef BUNDLE
+    doomwaddir = (char*) malloc((strlen(execpath) + 32) * sizeof(char));
+    strcpy(doomwaddir, execpath);
+    for (int c = strlen(execpath); doomwaddir[c] != '/' && c > 0; c--)
+        doomwaddir[c] = '\0';
+    strcat(doomwaddir, "../Resources/WAD");
+#else
 	doomwaddir = "WAD";
+#endif
 
 	// Commercial.
 	doom2wad = malloc(strlen(doomwaddir) + 1 + 9 + 1);
@@ -711,13 +719,13 @@ void FindResponseFile(void) {
 //
 // D_DoomMain
 //
-void D_DoomMain(void) {
+void D_DoomMain(char* execpath) {
 	int p;
 	char file[256];
 
 	FindResponseFile();
 
-	IdentifyVersion();
+	IdentifyVersion(execpath);
 
 	setbuf(stdout, NULL);
 	modifiedgame = false;
